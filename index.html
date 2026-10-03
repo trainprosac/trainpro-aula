@@ -3,36 +3,1578 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
   <title>Aula Virtual TRAINPRO</title>
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #f4f7fb;
+    :root{
+      --primary:#0b57d0;
+      --primary-dark:#174ea6;
+      --bg:#f4f7fb;
+      --text:#172033;
+      --muted:#667085;
+      --border:#e4e7ec;
+      --ok:#16803c;
+      --danger:#c62828;
     }
 
-    iframe {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+      color:#fff;
+      padding:16px;
+    }
+
+    .head{
+      max-width:900px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:42px;
+      height:42px;
+      background:#fff;
+      color:var(--primary);
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:21px;
+    }
+
+    .head h1{
+      font-size:18px;
+      margin:0;
+    }
+
+    .head small{
+      opacity:.86;
+    }
+
+    main{
+      max-width:900px;
+      margin:22px auto;
+      padding:0 14px 40px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 5px 20px rgba(16,24,40,.06);
+      margin-bottom:15px;
+    }
+
+    h2,h3{margin-top:0}
+
+    .notice{
+      background:#fff7e8;
+      border:1px solid #efd092;
+      border-radius:13px;
+      padding:13px;
+      line-height:1.45;
+      margin:14px 0;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:700;
+      margin:13px 0 6px;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      font-size:16px;
+    }
+
+    button{font:inherit}
+
+    .btn{
+      border:0;
+      background:var(--primary);
+      color:#fff;
+      padding:12px 15px;
+      border-radius:11px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .btn.secondary{
+      background:#eef2f7;
+      color:#344054;
+    }
+
+    .btn.block{width:100%}
+
+    .btn:disabled{
+      opacity:.5;
+      cursor:not-allowed;
+    }
+
+    .row{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .row .btn{flex:1}
+
+    .hidden{display:none!important}
+
+    .muted{color:var(--muted)}
+
+    .welcome{
+      background:#eef4ff;
+      padding:14px;
+      border-radius:13px;
+      margin-bottom:14px;
+    }
+
+    .course{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid var(--border);
+    }
+
+    .course:last-child{border-bottom:0}
+
+    .course-title{
+      font-weight:700;
+      line-height:1.35;
+    }
+
+    .course small{
+      display:block;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .course button{white-space:nowrap}
+
+    .video-wrap{
+      background:#111827;
+      border-radius:16px;
+      overflow:hidden;
+      margin:15px auto;
+      max-width:100%;
+    }
+
+    .video-wrap.landscape{aspect-ratio:16/9}
+
+    .video-wrap.vertical{
+      aspect-ratio:9/16;
+      max-width:390px;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .summary-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:13px;
+      background:#fff;
+    }
+
+    .summary-icon{font-size:28px}
+
+    .summary-item b{
+      display:block;
+      margin:6px 0 4px;
+    }
+
+    .summary-item p{
+      font-size:14px;
+      line-height:1.4;
+      margin:0;
+      color:#475467;
+    }
+
+    .quiz-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+    }
+
+    .progress{
+      height:9px;
+      background:#e8edf4;
+      border-radius:999px;
+      overflow:hidden;
+      margin:10px 0 18px;
+    }
+
+    .progress span{
+      display:block;
+      height:100%;
+      background:var(--primary);
+      width:0;
+    }
+
+    .question{
+      font-size:19px;
+      font-weight:700;
+      line-height:1.45;
+      margin-bottom:16px;
+    }
+
+    .option{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      margin:9px 0;
+      cursor:pointer;
+    }
+
+    .option:hover{background:#f8fafc}
+
+    .option input{
+      width:auto;
+      margin-top:2px;
+    }
+
+    .saved{
+      font-size:12px;
+      color:var(--ok);
+      margin-top:9px;
+      min-height:16px;
+    }
+
+    .error{
+      color:var(--danger);
+      font-size:13px;
+      margin-top:9px;
+    }
+
+    .score{
+      text-align:center;
+      padding:12px 0 18px;
+    }
+
+    .score .big{
+      font-size:42px;
+      font-weight:900;
+      color:var(--primary);
+    }
+
+    .wrong{
+      border-left:4px solid #f0b429;
+      background:#fffaf0;
+      padding:13px;
+      border-radius:10px;
+      margin:10px 0;
+    }
+
+    .wrong p{
+      margin:5px 0;
+      line-height:1.4;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .linkbtn{
+      border:0;
+      background:transparent;
+      color:var(--primary);
+      font-weight:700;
+      cursor:pointer;
+      padding:5px;
+    }
+
+    .loading{
+      padding:35px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .empty{
+      padding:18px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .modal-bg{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+    }
+
+    .modal-box{
+      background:#fff;
+      width:100%;
+      max-width:430px;
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 15px 45px rgba(0,0,0,.20);
+      text-align:center;
+    }
+
+    .modal-box h3{
+      margin:0 0 10px;
+      font-size:21px;
+    }
+
+    .modal-box p{
+      color:#667085;
+      line-height:1.5;
+      margin-bottom:20px;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .modal-actions button{flex:1}
+
+    @media(max-width:620px){
+      main{
+        margin-top:14px;
+        padding:0 10px 30px;
+      }
+
+      .card{
+        padding:14px;
+        border-radius:15px;
+      }
+
+      .summary-grid{grid-template-columns:1fr}
+
+      .course{align-items:flex-start}
+
+      .question{font-size:18px}
+    }
+
+    @media(max-width:500px){
+      .modal-actions{flex-direction:column}
     }
   </style>
 </head>
 
 <body>
 
-  <iframe
-    src="https://script.google.com/macros/s/AKfycbztZHbP9J5JiwdfiB3N41cJaQl7AXTp31ZMY2cP3XfWEMU5nr3VNP54OunTmRJx6dtDmA/exec"
-    allow="fullscreen"
-    loading="eager">
-  </iframe>
+<header>
+  <div class="head">
+    <div class="logo">T</div>
+    <div>
+      <h1 id="appTitle">AULA VIRTUAL TRAINPRO</h1>
+      <small>Capacitación rápida e interactiva</small>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div id="loading" class="card loading">
+    Iniciando aula...
+  </div>
+
+  <section id="loginView" class="hidden">
+    <div class="card">
+      <h2>Ingreso</h2>
+
+      <div id="lastUserBox" class="welcome hidden">
+        <div class="muted">Último ingreso en este dispositivo</div>
+        <b id="lastUserName"></b>
+        <div id="lastUserCompany" class="muted"></div>
+
+        <div class="row" style="margin-top:12px">
+          <button class="btn" onclick="continueLastUser()">CONTINUAR</button>
+          <button class="btn secondary" onclick="changePerson()">CAMBIAR PERSONA</button>
+        </div>
+      </div>
+
+      <div id="initialMessage" class="notice"></div>
+
+      <label>Nombre completo *</label>
+      <input id="nombre" maxlength="140" placeholder="Ej.: JUAN CARLOS PEREZ GARCIA">
+
+      <label>DNI <span class="muted">(opcional)</span></label>
+      <input id="dni" maxlength="25" inputmode="numeric" placeholder="DNI">
+
+      <label>Empresa <span class="muted">(opcional)</span></label>
+      <input id="empresa" maxlength="160" placeholder="Nombre de la empresa">
+
+      <div id="loginError" class="error"></div>
+
+      <button class="btn block" style="margin-top:15px" onclick="login()">
+        INGRESAR
+      </button>
+    </div>
+  </section>
+
+  <section id="coursesView" class="hidden">
+    <div class="topbar">
+      <div>
+        <b id="helloName"></b>
+        <div id="helloCompany" class="muted"></div>
+      </div>
+
+      <button class="linkbtn" onclick="changePerson()">
+        Cambiar persona
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>Cursos más solicitados</h2>
+
+      <input
+        id="courseSearch"
+        onkeyup="renderCourses()"
+        placeholder="Buscar curso..."
+      >
+
+      <div id="featuredCourses"></div>
+
+      <button
+        id="toggleOthers"
+        class="btn secondary block hidden"
+        onclick="toggleOthers()"
+      >
+        OTROS CURSOS
+      </button>
+
+      <div id="otherCourses" class="hidden"></div>
+    </div>
+  </section>
+
+  <section id="courseView" class="hidden">
+    <button class="linkbtn" onclick="showCourses()">
+      Volver a cursos
+    </button>
+
+    <div class="card">
+      <h2 id="courseTitle"></h2>
+
+      <div id="videoSection" class="hidden">
+        <div id="videoWrap" class="video-wrap landscape">
+          <iframe
+            id="videoFrame"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="row">
+        <button
+          id="summaryBtn"
+          class="btn secondary hidden"
+          onclick="showSummary()"
+        >
+          VER RESUMEN RÁPIDO
+        </button>
+
+        <button
+          id="quizBtn"
+          class="btn hidden"
+          onclick="startQuiz()"
+        >
+          IR A EVALUACIÓN
+        </button>
+      </div>
+
+      <p
+        id="directHint"
+        class="muted hidden"
+        style="text-align:center;margin-bottom:0"
+      >
+        Si ya conoces el tema, puedes ir directamente a la evaluación.
+      </p>
+
+      <div id="courseEmpty" class="empty hidden">
+        Este curso todavía está en preparación.
+      </div>
+    </div>
+
+    <div id="summaryCard" class="card hidden">
+      <h3>Resumen rápido</h3>
+
+      <div id="summaryGrid" class="summary-grid"></div>
+
+      <button
+        id="summaryQuizBtn"
+        class="btn block hidden"
+        style="margin-top:14px"
+        onclick="startQuiz()"
+      >
+        IR A EVALUACIÓN
+      </button>
+    </div>
+  </section>
+
+  <section id="quizView" class="hidden">
+    <button class="linkbtn" onclick="backToCourse()">
+      Volver al curso
+    </button>
+
+    <div class="card">
+      <div class="quiz-head">
+        <b id="quizCourse"></b>
+        <span id="questionCount" class="muted"></span>
+      </div>
+
+      <div class="progress">
+        <span id="progressBar"></span>
+      </div>
+
+      <div id="questionText" class="question"></div>
+      <div id="options"></div>
+
+      <div id="saveStatus" class="saved"></div>
+      <div id="quizError" class="error"></div>
+
+      <div class="row" style="margin-top:18px">
+        <button
+          id="prevBtn"
+          class="btn secondary"
+          onclick="prevQuestion()"
+        >
+          ANTERIOR
+        </button>
+
+        <button
+          id="nextBtn"
+          class="btn"
+          onclick="nextQuestion()"
+        >
+          SIGUIENTE
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultView" class="hidden">
+    <div class="card">
+      <div class="score">
+        <div class="muted">Resultado de evaluación</div>
+        <div id="scoreValue" class="big"></div>
+        <b id="resultMessage"></b>
+      </div>
+
+      <div id="wrongSection" class="hidden">
+        <h3>Revisa estas respuestas</h3>
+        <div id="wrongList"></div>
+      </div>
+
+      <div class="row" style="margin-top:18px">
+        <button class="btn secondary" onclick="repeatQuiz()">
+          VOLVER A INTENTAR
+        </button>
+
+        <button class="btn" onclick="showCourses()">
+          VOLVER A CURSOS
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="finishModal" class="modal-bg hidden">
+  <div class="modal-box">
+    <h3>¿Finalizar evaluación?</h3>
+
+    <p id="finishModalText">
+      Has respondido las 10 preguntas.
+      Puedes revisar tus respuestas antes de enviarlas.
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeFinishModal()">
+        REVISAR RESPUESTAS
+      </button>
+
+      <button class="btn" onclick="confirmFinish()">
+        FINALIZAR EVALUACIÓN
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_BASE =
+  "https://trainpro-aula-api.bitter-tree-5fb5.workers.dev";
+
+var appData = null;
+var currentUser = null;
+var currentCourse = null;
+var quizIndex = 0;
+var answers = {};
+var showOtherCourses = false;
+
+/* =========================
+   API
+========================= */
+
+async function apiGet(path) {
+  const response = await fetch(API_BASE + path, {
+    method: "GET",
+    cache: "no-store"
+  });
+
+  const data = await response.json();
+
+  if (!response.ok || (data && data.ok === false)) {
+    throw new Error(
+      data && data.error
+        ? data.error
+        : "No se pudo obtener la información."
+    );
+  }
+
+  return data;
+}
+
+async function apiPost(path, payload) {
+  const response = await fetch(API_BASE + path, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await response.json();
+
+  if (!response.ok || !data || data.ok === false) {
+    throw new Error(
+      data && data.error
+        ? data.error
+        : "No se pudo registrar la evaluación."
+    );
+  }
+
+  return data;
+}
+
+/* =========================
+   INICIO
+========================= */
+
+async function boot() {
+  var box = document.getElementById("loading");
+
+  box.textContent = "Conectando con TRAINPRO...";
+
+  try {
+    const data = await apiGet("/aula");
+    initApp(data);
+  } catch (err) {
+    box.textContent =
+      "No se pudo cargar el aula. " +
+      errorMessage(err);
+  }
+}
+
+function initApp(data) {
+  appData = data;
+
+  document.getElementById("loading").className = "hidden";
+
+  document.getElementById("appTitle").textContent =
+    data.config.NOMBRE_AULA ||
+    "AULA VIRTUAL TRAINPRO";
+
+  document.getElementById("initialMessage").textContent =
+    data.config.MENSAJE_INICIAL ||
+    "Escribe correctamente tu nombre completo. El nombre que registres podrá ser utilizado posteriormente para la emisión de tu certificado.";
+
+  var saved = readJson("trainpro_last_user");
+
+  if (saved && saved.nombre) {
+    document.getElementById("lastUserName").textContent =
+      saved.nombre;
+
+    document.getElementById("lastUserCompany").textContent =
+      saved.empresa || "";
+
+    document.getElementById("lastUserBox").className =
+      "welcome";
+  }
+
+  showView("loginView");
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+function login() {
+  var nombre =
+    document.getElementById("nombre").value
+      .replace(/^\s+|\s+$/g, "");
+
+  var dni =
+    document.getElementById("dni").value
+      .replace(/^\s+|\s+$/g, "");
+
+  var empresa =
+    document.getElementById("empresa").value
+      .replace(/^\s+|\s+$/g, "");
+
+  document.getElementById("loginError").textContent = "";
+
+  if (!nombre) {
+    document.getElementById("loginError").textContent =
+      "Ingresa tu nombre completo para continuar.";
+    return;
+  }
+
+  currentUser = {
+    nombre: nombre,
+    dni: dni,
+    empresa: empresa
+  };
+
+  localStorage.setItem(
+    "trainpro_last_user",
+    JSON.stringify(currentUser)
+  );
+
+  enterCourses();
+}
+
+function continueLastUser() {
+  var saved = readJson("trainpro_last_user");
+
+  if (!saved || !saved.nombre) {
+    changePerson();
+    return;
+  }
+
+  currentUser = saved;
+  enterCourses();
+}
+
+function changePerson() {
+  currentUser = null;
+
+  document.getElementById("nombre").value = "";
+  document.getElementById("dni").value = "";
+  document.getElementById("empresa").value = "";
+
+  document.getElementById("lastUserBox").className =
+    "welcome hidden";
+
+  showView("loginView");
+}
+
+/* =========================
+   CURSOS
+========================= */
+
+function enterCourses() {
+  document.getElementById("helloName").textContent =
+    currentUser.nombre;
+
+  document.getElementById("helloCompany").textContent =
+    currentUser.empresa || "";
+
+  document.getElementById("courseSearch").value = "";
+
+  showOtherCourses = false;
+
+  renderCourses();
+  showView("coursesView");
+}
+
+function renderCourses() {
+  var q =
+    normalizeText(
+      document.getElementById("courseSearch").value
+    );
+
+  var all = [];
+  var featured = [];
+  var others = [];
+  var i;
+
+  for (i = 0; i < appData.cursos.length; i++) {
+    if (
+      !q ||
+      normalizeText(appData.cursos[i].tema).indexOf(q) !== -1
+    ) {
+      all.push(appData.cursos[i]);
+    }
+  }
+
+  for (i = 0; i < all.length; i++) {
+    if (all[i].destacado) {
+      featured.push(all[i]);
+    } else {
+      others.push(all[i]);
+    }
+  }
+
+  var featuredHtml = "";
+
+  for (i = 0; i < featured.length; i++) {
+    featuredHtml += courseHtml(featured[i]);
+  }
+
+  if (!featuredHtml) {
+    featuredHtml =
+      '<div class="empty">No se encontraron cursos.</div>';
+  }
+
+  document.getElementById("featuredCourses").innerHTML =
+    featuredHtml;
+
+  var toggle =
+    document.getElementById("toggleOthers");
+
+  var box =
+    document.getElementById("otherCourses");
+
+  if (others.length > 0) {
+    toggle.className = "btn secondary block";
+
+    toggle.textContent =
+      showOtherCourses
+        ? "OCULTAR OTROS CURSOS"
+        : "OTROS CURSOS";
+
+    var otherHtml = "";
+
+    for (i = 0; i < others.length; i++) {
+      otherHtml += courseHtml(others[i]);
+    }
+
+    box.innerHTML = otherHtml;
+
+    box.className =
+      showOtherCourses ? "" : "hidden";
+  } else {
+    toggle.className =
+      "btn secondary block hidden";
+
+    box.className = "hidden";
+  }
+}
+
+function courseHtml(c) {
+  var status =
+    c.disponible
+      ? ""
+      : "<small>Contenido en preparación</small>";
+
+  var button = "";
+
+  if (c.disponible) {
+    button =
+      '<button class="btn" onclick="openCourse(\'' +
+      escapeHtml(c.id) +
+      '\')">INGRESAR</button>';
+  } else {
+    button =
+      '<button class="btn secondary" disabled>PRÓXIMAMENTE</button>';
+  }
+
+  return (
+    '<div class="course">' +
+      "<div>" +
+        '<div class="course-title">' +
+          escapeHtml(c.tema) +
+        "</div>" +
+        status +
+      "</div>" +
+      button +
+    "</div>"
+  );
+}
+
+function toggleOthers() {
+  showOtherCourses = !showOtherCourses;
+  renderCourses();
+}
+
+/* =========================
+   CURSO
+========================= */
+
+async function openCourse(id) {
+  showView("courseView");
+
+  document.getElementById("courseTitle").textContent =
+    "Cargando...";
+
+  document.getElementById("videoSection").className =
+    "hidden";
+
+  document.getElementById("summaryBtn").className =
+    "btn secondary hidden";
+
+  document.getElementById("quizBtn").className =
+    "btn hidden";
+
+  document.getElementById("summaryCard").className =
+    "card hidden";
+
+  document.getElementById("courseEmpty").className =
+    "empty hidden";
+
+  document.getElementById("directHint").className =
+    "muted hidden";
+
+  document.getElementById("videoFrame").src = "";
+
+  try {
+    const data = await apiGet(
+      "/course?courseId=" +
+      encodeURIComponent(id)
+    );
+
+    renderCourse(data);
+  } catch (err) {
+    document.getElementById("courseTitle").textContent =
+      "No se pudo cargar el curso";
+
+    document.getElementById("courseEmpty").textContent =
+      errorMessage(err);
+
+    document.getElementById("courseEmpty").className =
+      "empty";
+  }
+}
+
+function renderCourse(data) {
+  currentCourse = data;
+
+  document.getElementById("courseTitle").textContent =
+    data.tema;
+
+  var hasSomething = false;
+
+  if (data.videoActivo && data.video) {
+    var info = youtubeInfo(data.video);
+
+    if (info.id) {
+      var wrap =
+        document.getElementById("videoWrap");
+
+      wrap.className =
+        info.vertical
+          ? "video-wrap vertical"
+          : "video-wrap landscape";
+
+      document.getElementById("videoFrame").src =
+        "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(info.id) +
+        "?rel=0";
+
+      document.getElementById("videoSection").className =
+        "";
+
+      hasSomething = true;
+    }
+  }
+
+  if (
+    data.resumenActivo &&
+    data.resumen &&
+    data.resumen.length
+  ) {
+    document.getElementById("summaryBtn").className =
+      "btn secondary";
+
+    hasSomething = true;
+  }
+
+  if (
+    data.evaluacionActiva &&
+    data.preguntas &&
+    data.preguntas.length
+  ) {
+    document.getElementById("quizBtn").className =
+      "btn";
+
+    document.getElementById("directHint").className =
+      "muted";
+
+    hasSomething = true;
+  }
+
+  document.getElementById("courseEmpty").className =
+    hasSomething
+      ? "empty hidden"
+      : "empty";
+}
+
+/* =========================
+   RESUMEN
+========================= */
+
+function showSummary() {
+  var html = "";
+  var i;
+
+  for (i = 0; i < currentCourse.resumen.length; i++) {
+    var x = currentCourse.resumen[i];
+
+    html +=
+      '<div class="summary-item">' +
+        '<div class="summary-icon">' +
+          escapeHtml(x.icono || "OK") +
+        "</div>" +
+        "<b>" +
+          escapeHtml(x.titulo) +
+        "</b>" +
+        "<p>" +
+          escapeHtml(x.texto) +
+        "</p>" +
+      "</div>";
+  }
+
+  document.getElementById("summaryGrid").innerHTML =
+    html;
+
+  document.getElementById("summaryCard").className =
+    "card";
+
+  if (
+    currentCourse.evaluacionActiva &&
+    currentCourse.preguntas.length
+  ) {
+    document.getElementById("summaryQuizBtn").className =
+      "btn block";
+  }
+}
+
+/* =========================
+   EVALUACION
+========================= */
+
+function startQuiz() {
+  var saved = readJson(quizKey());
+
+  answers =
+    saved && saved.answers
+      ? saved.answers
+      : {};
+
+  quizIndex =
+    saved && typeof saved.index === "number"
+      ? Math.min(
+          saved.index,
+          currentCourse.preguntas.length - 1
+        )
+      : 0;
+
+  document.getElementById("quizCourse").textContent =
+    currentCourse.tema;
+
+  renderQuestion();
+  showView("quizView");
+}
+
+function renderQuestion() {
+  var list = currentCourse.preguntas;
+  var q = list[quizIndex];
+  var total = list.length;
+
+  var selected =
+    answers[String(q.numero)] || "";
+
+  var html = "";
+  var i;
+
+  document.getElementById("questionCount").textContent =
+    "Pregunta " +
+    (quizIndex + 1) +
+    " de " +
+    total;
+
+  document.getElementById("progressBar").style.width =
+    ((quizIndex + 1) / total * 100) + "%";
+
+  document.getElementById("questionText").textContent =
+    q.pregunta;
+
+  document.getElementById("quizError").textContent = "";
+  document.getElementById("saveStatus").textContent = "";
+
+  document.getElementById("prevBtn").disabled =
+    quizIndex === 0;
+
+  document.getElementById("nextBtn").disabled =
+    false;
+
+  document.getElementById("nextBtn").textContent =
+    quizIndex === total - 1
+      ? "FINALIZAR EVALUACIÓN"
+      : "SIGUIENTE";
+
+  for (i = 0; i < q.opciones.length; i++) {
+    var op = q.opciones[i];
+
+    var checked =
+      selected === op.letra
+        ? " checked"
+        : "";
+
+    html +=
+      '<label class="option">' +
+        '<input ' +
+          'type="radio" ' +
+          'name="answer" ' +
+          'value="' +
+          escapeHtml(op.letra) +
+          '"' +
+          checked +
+          ' onchange="saveAnswer(\'' +
+          escapeHtml(op.letra) +
+          '\')">' +
+        "<span>" +
+          escapeHtml(op.texto) +
+        "</span>" +
+      "</label>";
+  }
+
+  document.getElementById("options").innerHTML =
+    html;
+}
+
+function saveAnswer(letter) {
+  var q =
+    currentCourse.preguntas[quizIndex];
+
+  answers[String(q.numero)] = letter;
+
+  saveQuizLocal();
+
+  document.getElementById("saveStatus").textContent =
+    "Respuesta guardada";
+}
+
+function nextQuestion() {
+  var q =
+    currentCourse.preguntas[quizIndex];
+
+  if (!answers[String(q.numero)]) {
+    document.getElementById("quizError").textContent =
+      "Selecciona una respuesta para continuar.";
+    return;
+  }
+
+  if (
+    quizIndex <
+    currentCourse.preguntas.length - 1
+  ) {
+    quizIndex++;
+
+    saveQuizLocal();
+    renderQuestion();
+    window.scrollTo(0, 0);
+
+    return;
+  }
+
+  var total =
+    currentCourse.preguntas.length;
+
+  var answered = 0;
+  var i;
+
+  for (i = 0; i < currentCourse.preguntas.length; i++) {
+    if (
+      answers[
+        String(currentCourse.preguntas[i].numero)
+      ]
+    ) {
+      answered++;
+    }
+  }
+
+  if (answered < total) {
+    document.getElementById("quizError").textContent =
+      "Has respondido " +
+      answered +
+      " de " +
+      total +
+      " preguntas.";
+
+    return;
+  }
+
+  openFinishModal(total);
+}
+
+function prevQuestion() {
+  if (quizIndex > 0) {
+    quizIndex--;
+    saveQuizLocal();
+    renderQuestion();
+  }
+}
+
+/* =========================
+   MODAL FINALIZAR
+========================= */
+
+function openFinishModal(total) {
+  document.getElementById("finishModalText").textContent =
+    "Has respondido " +
+    total +
+    " de " +
+    total +
+    " preguntas. Puedes revisar tus respuestas antes de enviarlas.";
+
+  document.getElementById("finishModal").className =
+    "modal-bg";
+}
+
+function closeFinishModal() {
+  document.getElementById("finishModal").className =
+    "modal-bg hidden";
+}
+
+function confirmFinish() {
+  closeFinishModal();
+  submitQuiz();
+}
+
+/* =========================
+   ENVIAR RESULTADO
+========================= */
+
+async function submitQuiz() {
+  document.getElementById("nextBtn").disabled = true;
+  document.getElementById("prevBtn").disabled = true;
+
+  document.getElementById("quizError").textContent =
+    "Registrando resultado...";
+
+  try {
+    const data = await apiPost("/submit", {
+      user: currentUser,
+      courseId: currentCourse.id,
+      respuestas: answers
+    });
+
+    showResult(data.resultado);
+  } catch (err) {
+    document.getElementById("quizError").textContent =
+      errorMessage(err);
+
+    document.getElementById("nextBtn").disabled = false;
+
+    document.getElementById("prevBtn").disabled =
+      quizIndex === 0;
+  }
+}
+
+/* =========================
+   RESULTADO
+========================= */
+
+function showResult(result) {
+  localStorage.removeItem(quizKey());
+
+  document.getElementById("scoreValue").textContent =
+    formatNote(result.nota) + "/20";
+
+  document.getElementById("resultMessage").textContent =
+    result.mensaje ||
+    "Resultado registrado correctamente";
+
+  var wrong = result.incorrectas || [];
+  var html = "";
+  var i;
+
+  if (wrong.length > 0) {
+    for (i = 0; i < wrong.length; i++) {
+      var x = wrong[i];
+
+      html +=
+        '<div class="wrong">' +
+          "<b>Pregunta " +
+            x.numero +
+          "</b>" +
+          "<p>" +
+            escapeHtml(x.pregunta) +
+          "</p>" +
+          "<p><strong>Tu respuesta:</strong> " +
+            escapeHtml(x.respuestaTexto) +
+          "</p>" +
+          "<p><strong>Respuesta correcta:</strong> " +
+            escapeHtml(x.correctaTexto) +
+          "</p>" +
+          "<p><strong>Explicación:</strong> " +
+            escapeHtml(x.explicacion) +
+          "</p>" +
+        "</div>";
+    }
+
+    document.getElementById("wrongList").innerHTML =
+      html;
+
+    document.getElementById("wrongSection").className =
+      "";
+  } else {
+    document.getElementById("wrongList").innerHTML = "";
+
+    document.getElementById("wrongSection").className =
+      "hidden";
+  }
+
+  showView("resultView");
+}
+
+/* =========================
+   VOLVER A INTENTAR
+========================= */
+
+function repeatQuiz() {
+  answers = {};
+  quizIndex = 0;
+
+  localStorage.removeItem(quizKey());
+
+  document.getElementById("nextBtn").disabled = false;
+  document.getElementById("prevBtn").disabled = true;
+  document.getElementById("quizError").textContent = "";
+  document.getElementById("saveStatus").textContent = "";
+
+  renderQuestion();
+  showView("quizView");
+}
+
+/* =========================
+   AUTOGUARDADO
+========================= */
+
+function saveQuizLocal() {
+  localStorage.setItem(
+    quizKey(),
+    JSON.stringify({
+      answers: answers,
+      index: quizIndex,
+      savedAt: new Date().toISOString()
+    })
+  );
+}
+
+function quizKey() {
+  return (
+    "trainpro_quiz_" +
+    normalizeText(
+      currentUser
+        ? currentUser.nombre
+        : ""
+    ) +
+    "_" +
+    normalizeText(
+      currentUser
+        ? currentUser.empresa
+        : ""
+    ) +
+    "_" +
+    (
+      currentCourse
+        ? currentCourse.id
+        : ""
+    )
+  );
+}
+
+/* =========================
+   NAVEGACION
+========================= */
+
+function backToCourse() {
+  showView("courseView");
+}
+
+function showCourses() {
+  currentCourse = null;
+  enterCourses();
+}
+
+function showView(id) {
+  var ids = [
+    "loginView",
+    "coursesView",
+    "courseView",
+    "quizView",
+    "resultView"
+  ];
+
+  var i;
+
+  for (i = 0; i < ids.length; i++) {
+    document.getElementById(ids[i]).className =
+      "hidden";
+  }
+
+  document.getElementById(id).className = "";
+
+  window.scrollTo(0, 0);
+}
+
+/* =========================
+   YOUTUBE
+========================= */
+
+function youtubeInfo(url) {
+  var out = {
+    id: "",
+    vertical: false
+  };
+
+  try {
+    var clean = String(url || "");
+
+    if (clean.indexOf("/shorts/") !== -1) {
+      out.id =
+        clean
+          .split("/shorts/")[1]
+          .split("?")[0]
+          .split("/")[0];
+
+      out.vertical = true;
+      return out;
+    }
+
+    if (clean.indexOf("youtu.be/") !== -1) {
+      out.id =
+        clean
+          .split("youtu.be/")[1]
+          .split("?")[0]
+          .split("/")[0];
+
+      return out;
+    }
+
+    if (clean.indexOf("v=") !== -1) {
+      out.id =
+        clean
+          .split("v=")[1]
+          .split("&")[0];
+
+      return out;
+    }
+
+    if (clean.indexOf("/embed/") !== -1) {
+      out.id =
+        clean
+          .split("/embed/")[1]
+          .split("?")[0]
+          .split("/")[0];
+
+      return out;
+    }
+  } catch(e) {}
+
+  return out;
+}
+
+/* =========================
+   UTILIDADES
+========================= */
+
+function normalizeText(v) {
+  return String(v || "")
+    .toUpperCase()
+    .replace(/\s+/g, " ")
+    .replace(/^\s+|\s+$/g, "");
+}
+
+function formatNote(n) {
+  var x = Number(n);
+
+  if (Math.round(x) === x) {
+    return String(x);
+  }
+
+  return x.toFixed(1);
+}
+
+function readJson(key) {
+  try {
+    return JSON.parse(
+      localStorage.getItem(key) || "null"
+    );
+  } catch(e) {
+    return null;
+  }
+}
+
+function escapeHtml(v) {
+  return String(
+    v == null ? "" : v
+  )
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;")
+  .replace(/'/g, "&#039;");
+}
+
+function errorMessage(err) {
+  if (!err) {
+    return "Ocurrió un error.";
+  }
+
+  return err.message || String(err);
+}
+
+/* =========================
+   ARRANQUE
+========================= */
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    boot
+  );
+} else {
+  boot();
+}
+</script>
 
 </body>
 </html>
